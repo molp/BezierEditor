@@ -16,8 +16,8 @@ class BezierPathListReaderWriter {
 
     private final BezierPathExporter bezierPathExporter;
 
-    public BezierPathListReaderWriter() {
-        bezierPathExporter = new BezierPathExporter();
+    public BezierPathListReaderWriter(BezierPathExporter bezierPathExporter) {
+        this.bezierPathExporter = bezierPathExporter;
     }
 
     public void exportBezierFile(List<BezierPathListEntry> entries, File file) {
@@ -62,7 +62,7 @@ class BezierPathListReaderWriter {
             writer.write(entry.getIdentifier());
             writer.write(";");
 
-            final String serializedPath = bezierPathExporter.serialize(entry.getPath(), Vector2f.ZERO, 1f);
+            final String serializedPath = bezierPathExporter.serialize(entry.getPath(), Vector2f.ZERO);
             writer.write(serializedPath);
 
             writer.write("\n");

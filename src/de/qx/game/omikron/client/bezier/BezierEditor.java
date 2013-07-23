@@ -8,6 +8,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import de.qx.game.omikron.client.bezier.editor.*;
 import de.qx.game.omikron.client.bezier.file.BezierFileController;
 import de.qx.game.omikron.client.bezier.file.BezierFileModel;
+import de.qx.game.omikron.client.bezier.file.BezierPathExporter;
 import de.qx.game.omikron.client.bezier.list.BezierPathListController;
 import de.qx.game.omikron.client.bezier.list.BezierPathListEntry;
 import de.qx.game.omikron.client.bezier.list.BezierPathListModel;
@@ -65,6 +66,8 @@ public class BezierEditor implements DrawCallback {
     private Vector2f virtualWindowSize = new Vector2f(250, 420);
 
 
+    private BezierPathExporter exporter;
+
     private BezierEditorController editorController;
     private BezierEditorModel editorModel;
 
@@ -78,7 +81,9 @@ public class BezierEditor implements DrawCallback {
     private BezierFileModel fileModel;
 
     public BezierEditor() {
-        editorController = new BezierEditorController();
+        exporter = new BezierPathExporter(true, virtualWindowSize.y());
+
+        editorController = new BezierEditorController(exporter);
         editorModel = editorController.getModel();
 
         primitiveRenderer = new PrimitiveRenderer(width, height, virtualWindowPosition);
@@ -88,7 +93,7 @@ public class BezierEditor implements DrawCallback {
         pathListController = new BezierPathListController(pathListModel);
         pathListSelectionInList = new SelectionInList<BezierPathListEntry>(pathListModel.getEntries());
 
-        fileController = new BezierFileController(pathListModel);
+        fileController = new BezierFileController(pathListModel, exporter);
         fileModel = fileController.getModel();
 
         $$$setupUI$$$();

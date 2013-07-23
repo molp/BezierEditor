@@ -16,9 +16,10 @@ public class BezierEditorController {
     private BezierEditorModel model;
     private BezierPathExporter exporter;
 
-    public BezierEditorController() {
-        model = new BezierEditorModel();
-        exporter = new BezierPathExporter();
+    public BezierEditorController(BezierPathExporter exporter) {
+        this.exporter = exporter;
+
+        model  = new BezierEditorModel();
     }
 
     public BezierEditorModel getModel() {
@@ -40,7 +41,7 @@ public class BezierEditorController {
     }
 
     public void exportPath(Vector2f offset) {
-        System.out.println(exporter.serialize(model.getPath(), offset, 1f));
+        System.out.println(exporter.serialize(model.getPath(), offset));
     }
 
     public void moveControlPoint(int selectedBezierCurve, BezierPoint selectedBezierPoint, Vector2f delta) {

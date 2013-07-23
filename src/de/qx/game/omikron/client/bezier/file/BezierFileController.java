@@ -18,11 +18,11 @@ public class BezierFileController {
 
     private BezierPathListReaderWriter exporter;
 
-    public BezierFileController(BezierPathListModel pathListModel) {
+    public BezierFileController(BezierPathListModel pathListModel, BezierPathExporter bezierPathExporter) {
         this.model = new BezierFileModel();
         this.pathListModel = pathListModel;
 
-        exporter = new BezierPathListReaderWriter();
+        this.exporter = new BezierPathListReaderWriter(bezierPathExporter);
     }
 
     public void save(List<BezierPathListEntry> entries) {
