@@ -319,13 +319,9 @@ public class BezierEditor implements DrawCallback {
         mirrorVerticalButton.setText("mirror vertical");
         panel1.add(mirrorVerticalButton, cc.xy(3, 5));
         final JPanel panel2 = new JPanel();
-        panel2.setLayout(new FormLayout("fill:180px:grow,left:4dlu:noGrow,fill:45px:noGrow", "center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:6dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,fill:5dlu:grow"));
+        panel2.setLayout(new FormLayout("fill:180px:grow,left:4dlu:noGrow,fill:45px:noGrow", "center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:6dlu:noGrow,center:d:noGrow,center:6dlu:noGrow,center:max(d;4px):noGrow,fill:5dlu:grow"));
         menuPanel.add(panel2, cc.xyw(2, 3, 2, CellConstraints.DEFAULT, CellConstraints.FILL));
         panel2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Bezier Path List"));
-        pathList.setMinimumSize(new Dimension(0, 100));
-        pathList.setPreferredSize(new Dimension(0, 200));
-        pathList.setSelectionMode(0);
-        panel2.add(pathList, cc.xywh(1, 1, 1, 8, CellConstraints.FILL, CellConstraints.FILL));
         removePathButton = new JButton();
         removePathButton.setText("-");
         panel2.add(removePathButton, cc.xy(3, 5));
@@ -335,6 +331,12 @@ public class BezierEditor implements DrawCallback {
         duplicateButton = new JButton();
         duplicateButton.setText("d");
         panel2.add(duplicateButton, cc.xy(3, 7));
+        final JScrollPane scrollPane1 = new JScrollPane();
+        panel2.add(scrollPane1, cc.xywh(1, 1, 1, 8, CellConstraints.FILL, CellConstraints.FILL));
+        pathList.setMinimumSize(new Dimension(0, 100));
+        pathList.setPreferredSize(new Dimension(0, 100));
+        pathList.setSelectionMode(0);
+        scrollPane1.setViewportView(pathList);
         final JPanel panel3 = new JPanel();
         panel3.setLayout(new FormLayout("fill:176px:grow,left:4dlu:noGrow,fill:40px:grow", "center:p:grow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow"));
         menuPanel.add(panel3, cc.xyw(2, 1, 2, CellConstraints.DEFAULT, CellConstraints.FILL));
